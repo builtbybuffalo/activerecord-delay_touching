@@ -15,6 +15,7 @@ module ActiveRecord
       end
 
       def updated(attr, records)
+        @records[attr].instance_variable_get("@hash").rehash
         @records[attr].subtract records
         @records.delete attr if @records[attr].empty?
         @already_updated_records[attr] += records
